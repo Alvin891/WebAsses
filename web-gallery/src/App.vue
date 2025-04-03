@@ -1,18 +1,13 @@
 <script setup lang="ts">
+import GalleryPage from './features/gallery/views/GalleryPage.vue'
 import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
-  <div class="min-h-screen bg-gray-100 flex items-center justify-center">
-    <div class="p-6 bg-white shadow-lg rounded-lg text-center">
-      <h1 class="text-3xl font-bold text-blue-600">¡Tailwind está funcionando! 🎉</h1>
-      <p class="mt-2 text-gray-700">Este es un texto con estilos de Tailwind.</p>
-    </div>
-  </div>
+  <GalleryPage />
 </template>
 
-<script setup lang="ts">
-</script>
+
 
 <style scoped>
 .logo {
