@@ -49,3 +49,23 @@ web-gallery/
 ├── vite.config.ts
 └── README.md
 
+🚀 Instrucciones
+
+1. Clonar el repositorio
+git clone https://github.com/Alvin891/WebAsses.git
+cd WebAsses
+
+2. Instalar dependencias del frontend
+cd web-gallery
+npm install
+npm run dev
+
+Accede a http://localhost:5173 para ver la galería.
+
+3. Iniciar el backend (opcional pero recomendado)
+cd ../backend
+npm install
+npm run serve
+
+El backend expone las rutas en http://localhost:3000/api/images.
+
