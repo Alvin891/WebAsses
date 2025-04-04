@@ -49,6 +49,12 @@ web-gallery/
 ├── vite.config.ts
 └── README.md
 
+🔐 Configuración de la API Key
+Para utilizar la funcionalidad de descarga de imágenes aleatorias desde la API de Pexels, es necesario configurar tu propia API Key.
+	1.	Regístrate en https://www.pexels.com/api/ y copia tu clave.
+	2.	Crea el archivo src/shared/config.ts dentro del proyecto frontend (web-gallery) y agrega:
+    export const PEXELS_API_KEY = 'TU_API_KEY_AQUI'
+
 🚀 Instrucciones
 
 1. Clonar el repositorio
