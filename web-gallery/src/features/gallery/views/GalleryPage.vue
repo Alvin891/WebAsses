@@ -54,6 +54,7 @@
             :key="index"
             :url="img.url"
             :category="img.category"
+            @remove="removeImage(index)"
             />
         </div>
     </div>
@@ -122,6 +123,20 @@
             images.value.push(newImage)
         } catch (err) {
             console.error('Error guardando imagen:', err)
+        }
+    }
+
+    async function removeImage(index: number) {
+        try {
+            const res = await fetch(`http://localhost:3000/api/images/${index}`, {
+                method: 'DELETE',
+            })
+
+            if (!res.ok) throw new Error('No se pudo eliminar la imagen del backend')
+
+            images.value.splice(index, 1)
+        } catch (err) {
+            console.error('Error eliminando imagen:', err)
         }
     }
 
