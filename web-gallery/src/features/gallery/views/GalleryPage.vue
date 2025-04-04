@@ -1,19 +1,31 @@
 <template>
     <div class="relative min-h-screen bg-gray-100">
         <!-- Botones fijos en la parte superior izquierda -->
-        <div class="pt-6 px-6 flex gap-4">
-            <button
-            @click="toggleForm('url')"
-            class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded"
+        <div class="pt-6 px-6 flex justify-between items-center">
+            <div class="flex gap-4">
+                <button
+                @click="toggleForm('url')"
+                class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded"
+                >
+                Agregar imagen vía URL
+                </button>
+                <button
+                @click="toggleForm('random')"
+                class="bg-green-600 hover:bg-green-700 text-white font-semibold px-4 py-2 rounded"
+                >
+                Imagen random por categoría
+                </button>
+            </div>
+            <select
+                v-model="categoryFilter"
+                class="h-[42px] px-3 py-2 border border-gray-300 rounded text-sm"
             >
-            Agregar imagen vía URL
-            </button>
-            <button
-            @click="toggleForm('random')"
-            class="bg-green-600 hover:bg-green-700 text-white font-semibold px-4 py-2 rounded"
-            >
-            Imagen random por categoría
-            </button>
+                <option value="">Todas</option>
+                <option value="Education">Education</option>
+                <option value="Health">Health</option>
+                <option value="Environment">Environment</option>
+                <option value="Technology">Technology</option>
+            </select>
         </div>
     
         <!-- Formulario para agregar imagen vía URL -->
@@ -33,10 +45,10 @@
             <label class="block text-sm font-medium text-gray-700 mb-1">Selecciona categoría</label>
             <select v-model="selectedCategory" class="w-full p-2 border border-gray-300 rounded mb-4">
                 <option disabled value="">Selecciona una categoría</option>
-                <option value="education">Educación</option>
-                <option value="health">Salud</option>
-                <option value="nature">Ambiente</option>
-                <option value="technology">Tecnología</option>
+                <option value="Education">Educación</option>
+                <option value="Health">Salud</option>
+                <option value="Environment">Ambiente</option>
+                <option value="Technology">Tecnología</option>
             </select>
             <button
                 type="submit"
@@ -50,7 +62,7 @@
         <!-- Grid de imágenes -->
         <div class="p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             <ImageCard
-            v-for="(img, index) in images"
+            v-for="(img, index) in filteredImages"
             :key="index"
             :url="img.url"
             :category="img.category"
@@ -66,10 +78,11 @@
     import UploadForm from '../../upload/components/UploadForm.vue';
     import { PEXELS_API_KEY } from '../../../config/apiKey';
     
-    import { ref, onMounted } from 'vue'
+    import { ref, onMounted, computed } from 'vue'
     const showForm = ref<null | 'url' | 'random'>(null)
     const images = ref<{ url: string; category: string }[]>([])
     const selectedCategory = ref('')
+    const categoryFilter = ref('')
 
     function toggleForm(form: 'url' | 'random') {
     showForm.value = showForm.value === form ? null : form
@@ -94,7 +107,7 @@
                 const randomPhoto = data.photos[Math.floor(Math.random() * data.photos.length)]
                 await addImage({
                     url: randomPhoto.src.medium,
-                    category: selectedCategory.value.charAt(0).toUpperCase() + selectedCategory.value.slice(1),
+                    category: selectedCategory.value.charAt(0).toUpperCase() + selectedCategory.value.slice(1).toLowerCase(),
                 })
                 
             } else {
@@ -139,6 +152,12 @@
             console.error('Error eliminando imagen:', err)
         }
     }
+
+    const filteredImages = computed(() =>
+        categoryFilter.value
+            ? images.value.filter((img) => img.category === categoryFilter.value)
+            : images.value
+    )
 
     onMounted(async () => {
         try {

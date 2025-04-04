@@ -1,18 +1,18 @@
 [
   {
-    "url": "https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&h=350",
+    "url": "https://images.pexels.com/photos/301920/pexels-photo-301920.jpeg?auto=compress&cs=tinysrgb&h=350",
+    "category": "Education"
+  },
+  {
+    "url": "https://images.pexels.com/photos/1640770/pexels-photo-1640770.jpeg?auto=compress&cs=tinysrgb&h=350",
+    "category": "Health"
+  },
+  {
+    "url": "https://images.pexels.com/photos/1108572/pexels-photo-1108572.jpeg?auto=compress&cs=tinysrgb&h=350",
+    "category": "Environment"
+  },
+  {
+    "url": "https://images.pexels.com/photos/356056/pexels-photo-356056.jpeg?auto=compress&cs=tinysrgb&h=350",
     "category": "Technology"
-  },
-  {
-    "url": "https://images.pexels.com/photos/317157/pexels-photo-317157.jpeg?auto=compress&cs=tinysrgb&h=350",
-    "category": "Health"
-  },
-  {
-    "url": "https://images.pexels.com/photos/2821823/pexels-photo-2821823.jpeg?auto=compress&cs=tinysrgb&h=350",
-    "category": "Health"
-  },
-  {
-    "url": "https://images.pexels.com/photos/1386604/pexels-photo-1386604.jpeg?auto=compress&cs=tinysrgb&h=350",
-    "category": "Nature"
   }
 ]

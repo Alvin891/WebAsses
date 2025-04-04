@@ -12,13 +12,17 @@
         </div>
         <div class="mb-4">
             <label class="block text-sm font-medium text-gray-700 mb-1">Categoría</label>
-            <input
+            <select
             v-model="category"
-            type="text"
-            placeholder="Ej. Naturaleza"
             class="w-full p-2 border border-gray-300 rounded"
             required
-            />
+            >
+                <option value="" disabled selected>Selecciona una categoría</option>
+                <option value="Education">Educación</option>
+                <option value="Health">Salud</option>
+                <option value="Environment">Environment</option>
+                <option value="Technology">Technology</option>
+            </select>
         </div>
         <button
         type="submit"
@@ -41,7 +45,10 @@
     
     function handleSubmit() {
         if (!url.value || !category.value) return
-        emit('add-image', { url: url.value, category: category.value })
+        emit('add-image', {
+            url: url.value,
+            category: category.value.charAt(0).toUpperCase() + category.value.slice(1).toLowerCase()
+        })
         url.value = ''
         category.value = ''
     }
