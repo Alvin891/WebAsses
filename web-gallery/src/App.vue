@@ -7,8 +7,6 @@ import HelloWorld from './components/HelloWorld.vue'
   <GalleryPage />
 </template>
 
-
-
 <style scoped>
 .logo {
   height: 6em;
