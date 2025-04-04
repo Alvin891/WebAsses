@@ -1,0 +1,18 @@
+[
+  {
+    "url": "https://images.pexels.com/photos/1236421/pexels-photo-1236421.jpeg?auto=compress&cs=tinysrgb&h=350",
+    "category": "Education"
+  },
+  {
+    "url": "https://images.pexels.com/photos/2325447/pexels-photo-2325447.jpeg?auto=compress&cs=tinysrgb&h=350",
+    "category": "Nature"
+  },
+  {
+    "url": "https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&h=350",
+    "category": "Technology"
+  },
+  {
+    "url": "https://images.pexels.com/photos/317157/pexels-photo-317157.jpeg?auto=compress&cs=tinysrgb&h=350",
+    "category": "Health"
+  }
+]

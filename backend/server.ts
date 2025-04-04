@@ -1,15 +1,15 @@
-import  express from "express";
+import express from "express";
 import cors from 'cors';
-
+import imagesRoutes from './routes/images.routes';
 
 const app = express();
-const PORT = 3000;
+const port = 3000;
 
 app.use(cors());
 app.use(express.json());
 
-app.listen(PORT, () => {
-    console.log(`Servidor backend corriendo en http://localhost:${PORT}`)
+app.use('/api/images', imagesRoutes)
+
+app.listen(port, () => {
+    console.log(`Servidor backend corriendo en http://localhost:${port}`)
 })
-
-

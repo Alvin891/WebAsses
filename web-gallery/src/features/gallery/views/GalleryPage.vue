@@ -65,26 +65,9 @@
     import UploadForm from '../../upload/components/UploadForm.vue';
     import { PEXELS_API_KEY } from '../../../config/apiKey';
     
-    import { ref } from 'vue'
+    import { ref, onMounted } from 'vue'
     const showForm = ref<null | 'url' | 'random'>(null)
-    const images = ref([
-    {
-            url: 'https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=400&h=300&q=80',
-            category: 'Educación'
-        },
-        {
-            url: 'https://images.unsplash.com/photo-1550831107-1553da8c8464?auto=format&fit=crop&w=400&h=300&q=80',
-            category: 'Salud'
-        },
-        {
-            url: 'https://www.tooltyp.com/wp-content/uploads/2014/10/1900x920-8-beneficios-de-usar-imagenes-en-nuestros-sitios-web.jpg',
-            category: 'Ambiente'
-        },
-        {
-            url: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=400&h=300&q=80',
-            category: 'Tecnología'
-        },
-    ])
+    const images = ref<{ url: string; category: string }[]>([])
     const selectedCategory = ref('')
 
     function toggleForm(form: 'url' | 'random') {
@@ -108,10 +91,11 @@
             const data = await response.json()
             if (data.photos && data.photos.length > 0) {
                 const randomPhoto = data.photos[Math.floor(Math.random() * data.photos.length)]
-                images.value.push({
+                await addImage({
                     url: randomPhoto.src.medium,
                     category: selectedCategory.value.charAt(0).toUpperCase() + selectedCategory.value.slice(1),
                 })
+                
             } else {
                 console.warn('No se encontraron imágenes para esta categoría.')
             }
@@ -123,7 +107,32 @@
         showForm.value = null
     }
 
-    function addImage(newImage: { url: string; category: string }) {
-        images.value.push(newImage)
+    async function addImage(newImage: { url: string; category: string }) {
+        try {
+            const res = await fetch('http://localhost:3000/api/images', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newImage)
+            })
+
+            if (!res.ok) throw new Error('No se pudo guardar la imagen')
+
+            images.value.push(newImage)
+        } catch (err) {
+            console.error('Error guardando imagen:', err)
+        }
     }
+
+    onMounted(async () => {
+        try {
+            const res = await fetch('http://localhost:3000/api/images')
+            if (!res.ok) throw new Error('No se pudieron obtener las imágenes del backend')
+            const data = await res.json()
+            images.value = data
+        } catch (err) {
+            console.error('Error al cargar imágenes del backend:', err)
+        }
+    })
 </script>
